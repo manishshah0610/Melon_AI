@@ -43,12 +43,19 @@
         android:layout_width="141dp"
         android:layout_height="127dp"
         android:layout_alignStart="@+id/notepad"
-        android:layout_centerVertical="true"
+        android:layout_alignTop="@+id/tutorial"
         android:background="@drawable/rounded_corner"
         android:fontFamily="monospace"
         android:text="Alarm" />
 
 
+    <ImageButton
+        android:layout_width="97dp"
+        android:layout_height="79dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/home"
+        />
 
 
 
