@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,29 +7,49 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+    <Button
+        android:id="@+id/summary"
+        android:layout_margin="25dp"
+        android:layout_width="141dp"
+        android:layout_height="127dp"
+        android:background="@drawable/rounded_corner"
+        android:fontFamily="monospace"
+        android:text="Convert Text to Summary" />
 
-        <Button
-            android:layout_width="164dp"
-            android:layout_height="124dp"
+    <Button
+        android:id="@+id/notepad"
+        android:layout_margin="25dp"
+        android:layout_width="141dp"
+        android:layout_height="127dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rounded_corner"
+        android:fontFamily="monospace"
+        android:text="Notepad" />
 
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="monospace"
-            android:text="Convert Text to Summary" />
+    <Button
+        android:id="@+id/tutorial"
+        android:layout_width="141dp"
+        android:layout_height="127dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/summary"
+        android:layout_marginTop="186dp"
+        android:background="@drawable/rounded_corner"
+        android:fontFamily="monospace"
+        android:text="Tutorial" />
 
-        <Button
-            android:layout_width="222dp"
-            android:layout_height="117dp"
+    <Button
+        android:id="@+id/alarm"
+        android:layout_width="141dp"
+        android:layout_height="127dp"
+        android:layout_alignStart="@+id/notepad"
+        android:layout_centerVertical="true"
+        android:background="@drawable/rounded_corner"
+        android:fontFamily="monospace"
+        android:text="Alarm" />
 
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="monospace"
-            android:text="Convert Text to Summary" />
-    </LinearLayout>
 
 
 
 
-</LinearLayout>
+</RelativeLayout>
