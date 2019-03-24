@@ -7,8 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
+
     <Button
         android:id="@+id/summary"
+        android:drawableTop="@drawable/brief"
         android:layout_margin="25dp"
         android:layout_width="141dp"
         android:layout_height="127dp"
@@ -16,23 +20,28 @@
         android:fontFamily="monospace"
         android:text="Convert Text to Summary"
         android:onClick="summary"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+       />
+
+
 
     <Button
-        android:id="@+id/notepad"
-        android:onClick="notepad"
-        android:layout_margin="25dp"
+        android:id="@+id/alarm"
+        android:drawableTop="@drawable/alarm_clock"
         android:layout_width="141dp"
         android:layout_height="127dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="false"
+        android:layout_alignStart="@+id/notepad"
+        android:layout_alignTop="@+id/tutorial"
         android:background="@drawable/rounded_corner"
         android:fontFamily="monospace"
-        android:text="Notepad"
-        android:textColor="#000000"/>
+        android:onClick="alarm"
+        android:text="Alarm"
+        android:textColor="#000000"
+        tools:ignore="OnClick" />
 
     <Button
         android:id="@+id/tutorial"
+        android:drawableTop="@drawable/tutorial"
         android:layout_width="141dp"
         android:layout_height="127dp"
         android:layout_alignParentBottom="true"
@@ -44,18 +53,22 @@
         android:text="Tutorial"
         android:textColor="#000000" />
 
+
     <Button
-        android:id="@+id/alarm"
+        android:id="@+id/notepad"
+        android:drawableTop="@drawable/notepad"
+        android:onClick="notepad"
+        android:layout_margin="25dp"
         android:layout_width="141dp"
         android:layout_height="127dp"
-        android:layout_alignStart="@+id/notepad"
-        android:layout_alignTop="@+id/tutorial"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="false"
         android:background="@drawable/rounded_corner"
         android:fontFamily="monospace"
-        android:onClick="alarm"
-        android:text="Alarm"
-        android:textColor="#000000"
-        tools:ignore="OnClick" />
+        android:text="Notepad"
+        android:textColor="#000000"/>
+
+
 
     <ImageButton
         android:layout_width="97dp"
