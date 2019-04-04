@@ -66,7 +66,6 @@
 
     <Button
         android:id="@+id/notepad"
-
         android:layout_width="141dp"
         android:layout_height="127dp"
         android:layout_alignTop="@+id/summary"
@@ -98,6 +97,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:background="#123456"
+            android:clickable="true"
+            android:onClick="homed"
             android:src="@drawable/home" />
 
         <ImageButton
@@ -123,11 +124,14 @@
             android:id="@+id/profile"
             android:layout_width="97dp"
             android:layout_height="79dp"
-            android:layout_alignParentBottom="true"
+
+
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             android:background="#343456"
             android:layout_toEndOf="@+id/settings"
             android:src="@drawable/profile" />
-
+        <!--android:layout_alignParentBottom="true" -->
 
     </LinearLayout>
 

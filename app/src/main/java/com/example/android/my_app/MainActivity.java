@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void notepad(View view){
-        Intent ntp = new Intent(MainActivity.this, Notepad.class);
+        Intent ntp = new Intent(MainActivity.this, Notes.class);
         startActivity(ntp);
     }
 
@@ -46,5 +46,11 @@ public class MainActivity extends AppCompatActivity {
     public void setting(View view){
         Intent set = new Intent(MainActivity.this, Settings.class);
         startActivity(set);
+    }
+
+    public void homed(View view){
+        Intent set = new Intent(MainActivity.this, MainActivity.class);
+     //   startActivity(set);
+        finish();
     }
 }

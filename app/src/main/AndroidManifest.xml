@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.my_app">
-
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -24,7 +27,17 @@
         <activity android:name=".Tutorial" />
         <activity android:name=".Alarm" />
         <activity android:name=".Notepad" />
+        <activity android:name=".NoteWindow"/>
         <activity android:name=".Summary" />
+        <activity android:name=".Notes"/>
+        <activity android:name=".Settings"/>
+
+        <receiver android:name=".Alarm_Receiver"></receiver>
+        <service android:name="RingtonePlayingService"
+            android:enabled="true"></service>
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
 </manifest>

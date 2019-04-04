@@ -17,4 +17,8 @@ public class Tutorial extends AppCompatActivity {
         WebView webView = (WebView)findViewById(R.id.youtubeview);
         webView.loadUrl("https://www.youtube.com/watch?v=Raa0vBXA8OQ");
     }
+    public void onBackPressed()
+    {
+        finish();
+    }
 }

@@ -4,14 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Alarm">
 
+    <TimePicker
+        android:id="@+id/time_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TimePicker>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/start_alarm"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Alarm"/>
+
+        <Button
+            android:id="@+id/end_alarm"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End Alarm"/>
+
+
+    </LinearLayout>
     <TextView
+        android:id="@+id/alarm_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Did you set the alarm"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:text="This is my Alarm Activity"
-        android:textSize="22dp"
-        android:textStyle="bold" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/home"
+            android:layout_width="97dp"
+            android:layout_height="79dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:background="#123456"
+            android:clickable="true"
+            android:onClick="homed"
+            android:src="@drawable/home" />
+
+
+        <ImageButton
+            android:id="@+id/search_a"
+            android:layout_width="97dp"
+            android:layout_height="79dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/home"
+            android:background="#123423"
+            android:src="@drawable/search" />
+
+        <ImageButton
+            android:id="@+id/settings_a"
+            android:layout_width="97dp"
+            android:layout_height="79dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/search_a"
+            android:background="#E66B6B"
+            android:clickable="true"
+            android:onClick="setting"
+            android:src="@drawable/settings" />
+
+        <ImageButton
+            android:id="@+id/profile_a"
+            android:layout_width="97dp"
+            android:layout_height="79dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/settings_a"
+            android:background="#343456"
+            android:src="@drawable/profile" />
+
+        <!--android:layout_alignParentBottom="true" -->
+
+    </RelativeLayout>
+
 
 </LinearLayout>
