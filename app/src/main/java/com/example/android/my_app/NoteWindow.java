@@ -1,32 +1,22 @@
 package com.example.android.my_app;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Environment;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 
 public class NoteWindow extends AppCompatActivity {
     EditText note_title_view;
@@ -50,7 +40,7 @@ public class NoteWindow extends AppCompatActivity {
         touch_pos = intent.getIntExtra("touch_position",0);
         note_title_view = findViewById(R.id.noteTitleValue);
         note_view = findViewById(R.id.editNote);
-        save_note_button = (ImageButton)findViewById(R.id.saveButton);
+        save_note_button = findViewById(R.id.saveButton);
 
         if(!first_open)
         {
@@ -75,7 +65,7 @@ public class NoteWindow extends AppCompatActivity {
                 else mapModifyTitle(oldTitle, newTitle);
                 oldTitle = newTitle;
                 first_open = false;
-                Toast.makeText(getApplicationContext(), "Saved Note", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "Saved Note", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -213,7 +203,6 @@ public class NoteWindow extends AppCompatActivity {
             }
             fr.close();
             note_t = note_data.toString();
-            if(note_t==null)note_t="";
         }
         catch (IOException e)
         {
@@ -227,10 +216,7 @@ public class NoteWindow extends AppCompatActivity {
         if(!titleFilenameMap.isFile()) {
             try {
                 boolean i = titleFilenameMap.createNewFile();
-                if (i) {
-                    Toast.makeText(getApplicationContext(), "Failed to open myMapFile", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
+                return true;
             }
             catch (IOException e) {
                 Toast.makeText(getApplicationContext(), "Failed to open myMapsFile here 1", Toast.LENGTH_SHORT).show();

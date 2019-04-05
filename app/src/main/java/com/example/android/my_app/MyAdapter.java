@@ -164,9 +164,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             try {
                 boolean i = titleFilenameMap.createNewFile();
                 if (i) {
-                    Toast.makeText(con, "Failed to open myMapFile", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(con, "myMapFile just created", Toast.LENGTH_SHORT).show();
                     return false;
                 }
+                return true;
             }
             catch (IOException e) {
                 Toast.makeText(con, "Failed to open myMapsFile here 1", Toast.LENGTH_SHORT).show();
