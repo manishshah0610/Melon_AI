@@ -1,5 +1,6 @@
 package com.example.android.my_app;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -27,6 +28,9 @@ public class Alarm extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
         this.context = this;
@@ -77,18 +81,17 @@ public class Alarm extends AppCompatActivity {
 
         Button end_alarm = (Button) findViewById(R.id.end_alarm);
         end_alarm.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public void onClick(View view) {
                 set_alarm_text("Alarm off");
                 alarm_manager.cancel(pending_intent);
                 my_intent.putExtra("extra","alarm off");
                 sendBroadcast(my_intent);
+
+
             }
         });
-
-
-
-
     }
     public void onBackPressed()
     {

@@ -72,15 +72,14 @@ public class Notes extends AppCompatActivity {
         mAdapter.getItemViewType(1);
 
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
-                                                      @Override
-                                                      public void onClick(View view) {
-                                                          Intent intent = new Intent(Notes.this,NoteWindow.class);
-                                                          intent.putExtra("file_count",myNotes.size());
-                                                          intent.putExtra("first_open",true);
-                                                          startActivityForResult(intent,1);
-                                                      }
-                                                  }
-        );
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Notes.this,NoteWindow.class);
+                intent.putExtra("file_count",myNotes.size());
+                intent.putExtra("first_open",true);
+                startActivityForResult(intent,1);
+            }
+        });
     }
     Integer file_pos;
     protected void onActivityResult(int requestCode,int resultCode,Intent data) {

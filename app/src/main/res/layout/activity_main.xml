@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#000000"
+    android:background="#E9E9EB"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -13,17 +13,19 @@
         android:id="@+id/simpleSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#3F51B5"
         android:layout_alignParentEnd="true"/>
 
     <Button
         android:id="@+id/summary"
         android:layout_width="141dp"
         android:layout_height="127dp"
+
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="106dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_corner"
         android:drawableTop="@drawable/brief"
         android:fontFamily="monospace"
@@ -38,8 +40,9 @@
         android:layout_height="127dp"
         android:layout_alignStart="@+id/notepad"
         android:layout_alignTop="@+id/tutorial"
-        android:layout_marginStart="-2dp"
-        android:layout_marginTop="-2dp"
+
+        android:layout_marginStart="-190dp"
+        android:layout_marginTop="-14dp"
         android:background="@drawable/rounded_corner"
         android:drawableTop="@drawable/alarm_clock"
         android:fontFamily="monospace"
@@ -54,8 +57,10 @@
         android:layout_height="127dp"
         android:layout_alignStart="@+id/summary"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="265dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="294dp"
         android:background="@drawable/rounded_corner"
         android:drawableTop="@drawable/tutorial"
         android:fontFamily="monospace"
@@ -71,9 +76,10 @@
         android:layout_alignTop="@+id/summary"
         android:layout_alignRight="@+id/summary"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="-210dp"
+
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginRight="-195dp"
         android:background="@drawable/rounded_corner"
         android:drawableTop="@drawable/notepad"
         android:fontFamily="monospace"
@@ -92,44 +98,36 @@
 
         <ImageButton
             android:id="@+id/home"
-            android:layout_width="97dp"
-            android:layout_height="79dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:background="#123456"
             android:clickable="true"
             android:onClick="homed"
             android:src="@drawable/home" />
 
-        <ImageButton
-            android:id="@+id/search"
-            android:layout_width="97dp"
-            android:layout_height="79dp"
-            android:background="#123423"
-            android:layout_toEndOf="@+id/home"
-            android:src="@drawable/search" />
 
         <ImageButton
             android:id="@+id/settings"
-            android:layout_width="97dp"
-            android:layout_height="79dp"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/search"
+            android:layout_weight="1"
             android:background="#E66B6B"
             android:clickable="true"
             android:onClick="setting"
-            android:layout_toEndOf="@+id/search"
             android:src="@drawable/settings" />
 
         <ImageButton
             android:id="@+id/profile"
-            android:layout_width="97dp"
-            android:layout_height="79dp"
-
-
-            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_centerHorizontal="true"
-            android:background="#343456"
+            android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/settings"
+            android:layout_weight="1"
+            android:background="#343456"
             android:src="@drawable/profile" />
         <!--android:layout_alignParentBottom="true" -->
 
