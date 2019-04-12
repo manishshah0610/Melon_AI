@@ -24,6 +24,8 @@ public class Alarm extends AppCompatActivity {
     TextView update_text;
     Context context;
     PendingIntent pending_intent;
+    Calendar calendar;
+    Intent my_intent;
 
 
     @Override
@@ -38,9 +40,9 @@ public class Alarm extends AppCompatActivity {
         alarm_manager=(AlarmManager)getSystemService(ALARM_SERVICE);
         alarm_time_picker=(TimePicker)findViewById(R.id.time_picker);
         update_text = (TextView)findViewById(R.id.alarm_update);
-        final Calendar calendar = Calendar.getInstance();
+        calendar = Calendar.getInstance();
 
-       final Intent my_intent = new Intent(this.context,Alarm_Receiver.class);
+        my_intent = new Intent(this.context,Alarm_Receiver.class);
 
         Button start_alarm = (Button) findViewById(R.id.start_alarm);
 
@@ -69,7 +71,7 @@ public class Alarm extends AppCompatActivity {
 
             my_intent.putExtra("extra", "alarm on");
 
-            pending_intent =PendingIntent.getBroadcast(Alarm .this,0,
+            pending_intent =PendingIntent.getBroadcast(Alarm.this,0,
             my_intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
             alarm_manager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pending_intent);
@@ -85,6 +87,9 @@ public class Alarm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 set_alarm_text("Alarm off");
+                my_intent = new Intent(context,Alarm_Receiver.class);
+                pending_intent = PendingIntent.getBroadcast(Alarm.this,0,my_intent,PendingIntent.FLAG_UPDATE_CURRENT);
+                pending_intent.cancel();
                 alarm_manager.cancel(pending_intent);
                 my_intent.putExtra("extra","alarm off");
                 sendBroadcast(my_intent);
