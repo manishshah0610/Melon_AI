@@ -21,8 +21,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class Notes extends AppCompatActivity {
 
@@ -30,6 +32,8 @@ public class Notes extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    Set<Integer> available_file_set = new HashSet<Integer>();
+    int j;
 
     List<String> myNotes = new ArrayList<String>();
 
@@ -56,26 +60,37 @@ public class Notes extends AppCompatActivity {
         File files[] = defdir.listFiles();
         final int count_files = files.length;
 
-        String[] myDataset = new String[count_files];
-        for(int i=0;i<count_files;i++)
-        {
-            myDataset[i] = files[i].getName();
-            String fname = files[i].getName();
-            int l = fname.length();
+        for(int i=0;i<1000;i++)available_file_set.add(i);
+
+        for (File f:files
+             ) {
+            String fname = f.getName();
+            int l=fname.length();
             if(l>4 && fname.charAt(l-1)=='t' && fname.charAt(l-2)=='x' && fname.charAt(l-3)=='t' && fname.charAt(l-4)=='.')
             {
                 myNotes.add(fname);
+                int k = Integer.parseInt(fname.substring(6,l-4));
+                Log.d("this:",Integer.toString(k));
+                available_file_set.remove(k);
             }
         }
-        mAdapter = new MyAdapter(myNotes,Notes.this);
+        mAdapter = new MyAdapter(myNotes,Notes.this,available_file_set);
         recyclerView.setAdapter(mAdapter);
         mAdapter.getItemViewType(1);
+
+
+
 
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Notes.this,NoteWindow.class);
-                intent.putExtra("file_count",myNotes.size());
+                for(Integer a:available_file_set)
+                {
+                    j=a;
+                    break;
+                }
+                intent.putExtra("file_count",j);
                 intent.putExtra("first_open",true);
                 startActivityForResult(intent,1);
             }
@@ -85,24 +100,23 @@ public class Notes extends AppCompatActivity {
     protected void onActivityResult(int requestCode,int resultCode,Intent data) {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                Intent intent = data;
-                Boolean changed = intent.getBooleanExtra("SAVED", false);
+                boolean changed = data.getBooleanExtra("SAVED", false);
                 if (changed) {
-                    file_pos = intent.getIntExtra("FILE_NO", 0);
+                    file_pos = data.getIntExtra("FILE_NO", 0);
                     String p = fileDataRead();
                     if (p == null) {
                         Log.d("ERROR HERE: ","WHY");}
                     else{
-                        myNotes.add("notes_"+file_pos+".txt");}
+                        myNotes.add("notes_"+file_pos+".txt");
+                    available_file_set.remove(file_pos);}
                     mAdapter.notifyDataSetChanged();
                 }
             }
         } else if (requestCode == 2) {
             if (resultCode == RESULT_OK) {
-                Intent intent = data;
-                Boolean changed = intent.getBooleanExtra("SAVED", false);
+                boolean changed = data.getBooleanExtra("SAVED", false);
                 if (changed) {
-                    file_pos = intent.getIntExtra("touch_position", 0);
+                    file_pos = data.getIntExtra("touch_position", 0);
                     mAdapter.notifyItemChanged(file_pos);
                 }
             }
