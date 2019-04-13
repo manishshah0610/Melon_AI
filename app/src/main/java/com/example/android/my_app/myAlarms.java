@@ -24,6 +24,7 @@ public class myAlarms extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     List<String> myAlarmsList = new ArrayList<String>();
     Set<Integer> availableID = new HashSet<Integer>();
+    List<Boolean> alarmsState = new ArrayList<Boolean>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,10 @@ public class myAlarms extends AppCompatActivity {
                     j=0;
                     String ss = s.toString();
                     myAlarmsList.add(ss);
-                    Integer p = Integer.parseInt(ss.substring(5,ss.length()-1));
+                    if(ss.substring(ss.length()-2,ss.length()-1).equals("0"))
+                    alarmsState.add(false);
+                    else alarmsState.add(true);
+                    Integer p = Integer.parseInt(ss.substring(5,ss.length()-3));
                     availableID.remove(p);
                     s = new StringBuilder();
                 }
@@ -70,7 +74,7 @@ public class myAlarms extends AppCompatActivity {
             Log.d("AlarmFile:","Error in Alarm File Creation",e);
             Toast.makeText(getApplicationContext(),"Problem Reading from alarms",Toast.LENGTH_SHORT).show();
         }
-        mAdapter = new MyAdapter2(myAlarmsList,myAlarms.this,availableID);
+        mAdapter = new MyAdapter2(myAlarmsList,myAlarms.this,availableID,alarmsState);
         recyclerView.setAdapter(mAdapter);
         mAdapter.getItemViewType(1);
 
@@ -86,6 +90,7 @@ public class myAlarms extends AppCompatActivity {
                 }
                 intent.putExtra("alarm_ID",k);
                 intent.putExtra("first_open",true);
+                intent.putExtra("alarm_State",true);
                 startActivityForResult(intent,1);
             }
         });
@@ -94,8 +99,9 @@ public class myAlarms extends AppCompatActivity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 String temp = data.getStringExtra("Alarm_String");
-                availableID.remove(Integer.parseInt(temp.substring(5,temp.length()-1)));
+                availableID.remove(Integer.parseInt(temp.substring(5,temp.length()-3)));
                 myAlarmsList.add(temp);
+                alarmsState.add(true);
                 mAdapter.notifyDataSetChanged();
             }
         }

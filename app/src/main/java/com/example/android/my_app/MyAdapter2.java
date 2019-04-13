@@ -31,6 +31,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
     File f;
     Context con;
     Set<Integer> availableIDs;
+    List<Boolean> alarmsOn;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -48,11 +49,12 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
 //    public MyAdapter(String[] myDataset) {
     //      mDataset = myDataset;
     //}
-    public MyAdapter2(List<String> myDataset, Context c, Set<Integer> availableID) {
+    public MyAdapter2(List<String> myDataset, Context c, Set<Integer> availableID,List<Boolean> alarmsState) {
         f = c.getFilesDir();
         alarmsDataset = myDataset;
         con = c;
         availableIDs = availableID;
+        alarmsOn = alarmsState;
     }
 
 
@@ -87,17 +89,21 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
         alarmPos = alarmsDataset.get(position);
         String temp = alarmPos.substring(0,2)+":"+alarmPos.substring(2,4);
         alarm1.setText(temp);
+        alarmSwitch.setChecked(alarmsOn.get(position));
+
         alarm1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int pos = holder.getAdapterPosition();
                 Intent intent = new Intent(con,Alarm2.class);
-                intent.putExtra("alarm_ID",Integer.parseInt(alarmPos.substring(5,alarmPos.length()-1)));
+                intent.putExtra("alarm_ID",Integer.parseInt(alarmPos.substring(5,alarmPos.length()-3)));
                 intent.putExtra("alarm_string",alarmPos);
                 intent.putExtra("first_open",false);
                 intent.putExtra("touch_position",pos);
                 ((Activity)con).startActivityForResult(intent,2);
                 alarmSwitch.setChecked(true);
+                alarmsOn.set(pos,true);
+
             }
         });
         removeButton.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +112,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
                 int pos = holder.getAdapterPosition();
                 String alarm = alarmsDataset.get(pos);
                 my_intent = new Intent(con,Alarm_Receiver.class);
-                int AlarmId = Integer.parseInt(alarm.substring(5,alarm.length()-1));
+                int AlarmId = Integer.parseInt(alarm.substring(5,alarm.length()-3));
                 pendingIntent = PendingIntent.getBroadcast(con,AlarmId,
                         my_intent,PendingIntent.FLAG_UPDATE_CURRENT);
                 pendingIntent.cancel();
@@ -114,6 +120,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
                 alarm_manager.cancel(pendingIntent);
                 alarmRemoveFromFile(alarm);
                 alarmsDataset.remove(pos);
+                alarmsOn.remove(pos);
                 Toast.makeText(con,"REMOVED!!",Toast.LENGTH_SHORT).show();
                 notifyItemRemoved(pos);
 
@@ -125,17 +132,23 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
                 if(alarmSwitch.isChecked()){
                     int pos = holder.getAdapterPosition();
                     String alarm = alarmsDataset.get(pos);
+                    alarmsOn.set(pos,true);
+                    updateAlarmState(alarm,true);
+
                     my_intent = new Intent(con,Alarm_Receiver.class);
-                    int AlarmId = Integer.parseInt(alarm.substring(5,alarm.length()-1));
+                    int AlarmId = Integer.parseInt(alarm.substring(5,alarm.length()-3));
+
                     pendingIntent = PendingIntent.getBroadcast(con,AlarmId,
                             my_intent,PendingIntent.FLAG_UPDATE_CURRENT);
                     pendingIntent.cancel();
                     alarm_manager=(AlarmManager)con.getSystemService(ALARM_SERVICE);
                     alarm_manager.cancel(pendingIntent);
+
                     my_intent = new Intent(con,Alarm_Receiver.class);
                     my_intent.putExtra("AlarmAction","Turn On");
                     pendingIntent = PendingIntent.getBroadcast(con,AlarmId,
                             my_intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
                     Calendar calendar = Calendar.getInstance();
                     calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(alarm.substring(0,2)));
                     calendar.set(Calendar.MINUTE,Integer.parseInt(alarm.substring(2,4)));
@@ -147,8 +160,11 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
                 else{
                     int pos = holder.getAdapterPosition();
                     String alarm = alarmsDataset.get(pos);
+                    alarmsOn.set(pos,false);
+                    updateAlarmState(alarm,false);
+
                     my_intent = new Intent(con,Alarm_Receiver.class);
-                    int AlarmId = Integer.parseInt(alarm.substring(5,alarm.length()-1));
+                    int AlarmId = Integer.parseInt(alarm.substring(5,alarm.length()-3));
                     pendingIntent = PendingIntent.getBroadcast(con,AlarmId,
                             my_intent,PendingIntent.FLAG_UPDATE_CURRENT);
                     pendingIntent.cancel();
@@ -157,6 +173,33 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
                 }
             }
         });
+    }
+    public void updateAlarmState(String alarm,boolean state) {
+        try {
+            FileReader fr = new FileReader(f + "/myAlarmsFile");
+            StringBuilder sr = new StringBuilder();
+            int j;
+            while((j=fr.read())!=-1)
+            {
+                sr.append((char)j);
+            }
+            fr.close();
+            String s = sr.toString();
+            j = s.indexOf(alarm);
+            StringBuilder finalV = new StringBuilder(s);
+            if(state==true)
+               finalV.setCharAt(j+alarm.length()-2,'1');
+            else
+                finalV.setCharAt(j+alarm.length()-2,'0');
+
+            FileWriter fw = new FileWriter(f+"/myAlarmsFile",false);
+            fw.write(finalV.toString());
+            fw.close();
+        }
+        catch (IOException e){
+            Log.d("Error Reading Alarms","WHYY",e);
+            Toast.makeText(con,"Error Reading Alarm", Toast.LENGTH_SHORT).show();
+        }
     }
     public void alarmRemoveFromFile(String alarm){
         try {
@@ -173,7 +216,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
             StringBuilder finalV = new StringBuilder();
             finalV.append(s.substring(0,j));
             finalV.append(s.substring(j+alarm.length()));
-            FileWriter fw = new FileWriter(f+"/myAlarmsFile");
+            FileWriter fw = new FileWriter(f+"/myAlarmsFile",false);
             fw.write(finalV.toString());
             fw.close();
         }

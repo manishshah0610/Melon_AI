@@ -61,7 +61,7 @@ public class Alarm2 extends AppCompatActivity {
         initial_minute = Integer.parseInt(alarm_time.substring(2,4));
         alarm_time_picker.setHour(initial_hour);
         alarm_time_picker.setMinute(initial_minute);
-        oldTime = alarm_time.substring(0,2)+alarm_time.substring(2,4)+" "+AlarmId+"/";
+        oldTime = alarm_time.substring(0,2)+alarm_time.substring(2,4)+" "+AlarmId+" 1/";
         //calendar.set(Calendar.MINUTE,initial_minute);
         //calendar.set(Calendar.HOUR_OF_DAY,initial_hour);
         }
@@ -106,9 +106,9 @@ public class Alarm2 extends AppCompatActivity {
                     pending_intent = PendingIntent.getBroadcast(context,AlarmId,
                             my_intent,PendingIntent.FLAG_UPDATE_CURRENT);
                     alarm_manager.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pending_intent);
-                    addAlarmToFile(hour_string+minute_string+" "+AlarmId+"/");
+                    addAlarmToFile(hour_string+minute_string+" "+AlarmId+" 1/");
                     first_open = false;
-                    oldTime = hour_string + minute_string + " " + AlarmId + "/";
+                    oldTime = hour_string + minute_string + " " + AlarmId + " 1/";
                 }
                 else
                 {
@@ -125,7 +125,7 @@ public class Alarm2 extends AppCompatActivity {
                     pending_intent = PendingIntent.getBroadcast(context,AlarmId,
                             my_intent,PendingIntent.FLAG_UPDATE_CURRENT);
                     alarm_manager.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pending_intent);
-                    newTime = hour_string+minute_string+" "+AlarmId+"/";
+                    newTime = hour_string+minute_string+" "+AlarmId+" 1/";
                     modifyAlarmFile(oldTime,newTime);
                     oldTime = newTime;
                     first_open = false;
@@ -203,7 +203,7 @@ public class Alarm2 extends AppCompatActivity {
         newTime = hour_string+minute_string;
 
         Intent intent = new Intent();
-        intent.putExtra("Alarm_String",newTime+" "+AlarmId+"/");
+        intent.putExtra("Alarm_String",newTime+" "+AlarmId+" 1/");
         if(isValid)
         setResult(RESULT_OK,intent);
         else setResult(RESULT_CANCELED,intent);
