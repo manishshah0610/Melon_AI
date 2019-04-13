@@ -78,9 +78,6 @@ public class Notes extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
         mAdapter.getItemViewType(1);
 
-
-
-
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
