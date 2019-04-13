@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void notepad(View view){
-        Intent ntp = new Intent(MainActivity.this, Notes.class);
+        Intent ntp = new Intent(MainActivity.this, MainActivity_videocall.class);
         startActivity(ntp);
     }
 
