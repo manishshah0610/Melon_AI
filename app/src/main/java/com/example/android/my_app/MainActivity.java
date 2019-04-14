@@ -12,15 +12,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+   protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // initiate a Switch
-        Switch simpleSwitch = (Switch) findViewById(R.id.simpleSwitch);
+       /* Switch simpleSwitch = (Switch) findViewById(R.id.simpleSwitch);
 
 // check current state of a Switch (true or false).
-        Boolean switchState = simpleSwitch.isChecked();
+        Boolean switchState = simpleSwitch.isChecked();*/
     }
 
     public void tutorial(View view){

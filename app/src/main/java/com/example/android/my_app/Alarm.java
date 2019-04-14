@@ -1,6 +1,6 @@
+
 package com.example.android.my_app;
 
-import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -24,15 +24,10 @@ public class Alarm extends AppCompatActivity {
     TextView update_text;
     Context context;
     PendingIntent pending_intent;
-    Calendar calendar;
-    Intent my_intent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
         this.context = this;
@@ -40,9 +35,9 @@ public class Alarm extends AppCompatActivity {
         alarm_manager=(AlarmManager)getSystemService(ALARM_SERVICE);
         alarm_time_picker=(TimePicker)findViewById(R.id.time_picker);
         update_text = (TextView)findViewById(R.id.alarm_update);
-        calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
 
-        my_intent = new Intent(this.context,Alarm_Receiver.class);
+        final Intent my_intent = new Intent(this.context,Alarm_Receiver.class);
 
         Button start_alarm = (Button) findViewById(R.id.start_alarm);
 
@@ -69,34 +64,32 @@ public class Alarm extends AppCompatActivity {
                 }
                 set_alarm_text("Alarm set to " + hour_string + ":" + minute_string);
 
-            my_intent.putExtra("extra", "alarm on");
+                my_intent.putExtra("extra", "alarm on");
 
-            pending_intent =PendingIntent.getBroadcast(Alarm.this,0,
-            my_intent,PendingIntent.FLAG_UPDATE_CURRENT);
+                pending_intent =PendingIntent.getBroadcast(Alarm .this,0,
+                        my_intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
-            alarm_manager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pending_intent);
+                alarm_manager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pending_intent);
 
-
-
-        }
-        });
-
-        Button end_alarm = (Button) findViewById(R.id.end_alarm);
-        end_alarm.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public void onClick(View view) {
-                set_alarm_text("Alarm off");
-                my_intent = new Intent(context,Alarm_Receiver.class);
-                pending_intent = PendingIntent.getBroadcast(Alarm.this,0,my_intent,PendingIntent.FLAG_UPDATE_CURRENT);
-                pending_intent.cancel();
-                alarm_manager.cancel(pending_intent);
-                my_intent.putExtra("extra","alarm off");
-                sendBroadcast(my_intent);
 
 
             }
         });
+
+        Button end_alarm = (Button) findViewById(R.id.end_alarm);
+        end_alarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                set_alarm_text("Alarm off");
+                alarm_manager.cancel(pending_intent);
+                my_intent.putExtra("extra","alarm off");
+                sendBroadcast(my_intent);
+            }
+        });
+
+
+
+
     }
     public void onBackPressed()
     {
