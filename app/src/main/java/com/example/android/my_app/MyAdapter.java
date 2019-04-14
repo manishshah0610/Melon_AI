@@ -18,15 +18,21 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import static android.app.Activity.RESULT_OK;
 import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private String[] mDataset;
-    List<String> notesDataset;
-    File f;
-    Context con;
+
+    private List<String> notesDataset;
+    private Set<Integer> availableSet;
+    private File f;
+    private Context con;
+    private TextView note1;
+    private String fname;
+    private ImageButton removeButton;
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -40,14 +46,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-//    public MyAdapter(String[] myDataset) {
-    //      mDataset = myDataset;
-    //}
-    public MyAdapter(List<String> myDataset, Context c) {
+    public MyAdapter(List<String> myDataset, Context c, Set<Integer> available_file_set) {
         f = c.getFilesDir();
         notesDataset = myDataset;
         con = c;
+        availableSet = available_file_set;
     }
 
 
@@ -103,9 +106,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return title;
     }
     // Replace the contents of a view (invoked by the layout manager)
-    TextView note1;
-    String fname;
-    ImageButton removeButton;
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         // - get element from your dataset at this position
@@ -146,6 +146,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     String title = getTitleMapped(fname);
                     deleteMap(fpos);
                     fr.delete();
+                    availableSet.remove(fpos);
                     notesDataset.remove(pos);
                     notifyItemRemoved(pos);
                     Toast.makeText(con,title+" Deleted",Toast.LENGTH_SHORT).show();

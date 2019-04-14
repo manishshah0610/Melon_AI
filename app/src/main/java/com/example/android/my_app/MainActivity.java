@@ -1,6 +1,9 @@
 package com.example.android.my_app;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void alarm(View view){
-        Intent alm = new Intent(MainActivity.this, Alarm.class);
+        Intent alm = new Intent(MainActivity.this, myAlarms.class);
         startActivity(alm);
     }
 
     public void notepad(View view){
-        Intent ntp = new Intent(MainActivity.this, Notes.class);
+        Intent ntp = new Intent(MainActivity.this, MainActivity_videocall.class);
         startActivity(ntp);
     }
 
@@ -53,4 +56,20 @@ public class MainActivity extends AppCompatActivity {
      //   startActivity(set);
         finish();
     }
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Channel_0";
+            String description = "App Notification Channel";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("0", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Alarm2">
+
+    <TimePicker
+        android:id="@+id/time_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TimePicker>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time_picker"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/start_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:text="Start Alarm"
+            android:textSize="25dp" />
+
+
+        <TextView
+            android:id="@+id/alarm_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:fontFeatureSettings="@string/action_settings"
+            android:includeFontPadding="true"
+            android:text="Did you set the alarm?"
+            android:textAlignment="center"
+            android:textColor="#02203D"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <ImageButton
+            android:id="@+id/home"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#123456"
+            android:clickable="true"
+            android:onClick="homed"
+            android:src="@drawable/home" />
+
+
+        <ImageButton
+            android:id="@+id/settings_a"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/home"
+            android:layout_weight="1"
+            android:background="#E66B6B"
+            android:clickable="true"
+            android:onClick="setting"
+            android:src="@drawable/settings" />
+
+        <ImageButton
+            android:id="@+id/profile_a"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/settings_a"
+            android:layout_weight="1"
+            android:background="#343456"
+            android:src="@drawable/profile" />
+
+        <!-- <Button
+            android:id="@+id/snooze"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="162dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="161dp"
+            android:clickable="true"
+            android:text="Snooze" />
+        //android:onClick="true"/>-->
+
+    </LinearLayout>
+
+</RelativeLayout>
