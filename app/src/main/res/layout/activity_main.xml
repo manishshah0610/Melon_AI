@@ -24,7 +24,8 @@
         android:drawableTop="@drawable/brief"
         android:fontFamily="monospace"
         android:onClick="summary"
-        android:text="Convert Text to Summary"
+        android:text="Summary"
+        android:textSize="10dp"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/tutorial"
@@ -44,6 +45,7 @@
         android:fontFamily="monospace"
         android:onClick="alarm"
         android:text="Alarm"
+        android:textSize="10dp"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/notepad"
@@ -64,6 +66,7 @@
         android:fontFamily="monospace"
         android:onClick="tutorial"
         android:text="Tutorial"
+        android:textSize="12dp"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
@@ -84,6 +87,7 @@
         android:fontFamily="monospace"
         android:onClick="notepad"
         android:text="Notepad"
+        android:textSize="12dp"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
@@ -94,19 +98,20 @@
         android:id="@+id/video"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="32dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_corner"
-        android:fontFamily="monospace"
         android:drawableTop="@drawable/video"
+        android:fontFamily="monospace"
         android:text="Video"
         android:textColor="#000000"
+        android:textSize="12dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toEndOf="@+id/sound"
         app:layout_constraintTop_toTopOf="@+id/guideline6"
-        app:layout_constraintVertical_bias="0.256"></Button>
+        app:layout_constraintVertical_bias="0.203"></Button>
 
     <Button
         android:id="@+id/sound"
@@ -119,7 +124,10 @@
         android:fontFamily="monospace"
         android:drawableTop="@drawable/sound"
         android:text="Sound"
+        android:textSize="12dp"
         android:textColor="#000000"
+        android:clickable="true"
+        android:onClick="rec"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/video"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -130,15 +138,13 @@
         android:id="@+id/home"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:background="#123456"
+        android:background="#797371"
         android:clickable="true"
         android:onClick="homed"
         android:src="@drawable/home"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/guideline10"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline16"
         app:layout_constraintVertical_bias="1.0"
         app:layout_constraintWidth_percent="0.33" />
 
@@ -147,16 +153,15 @@
         android:id="@+id/settings"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#E66B6B"
+
+        android:background="#797371"
         android:clickable="true"
         android:onClick="setting"
         android:src="@drawable/settings"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
-        app:layout_constraintStart_toEndOf="@+id/profile"
-
-        app:layout_constraintTop_toTopOf="@+id/guideline10"
+        app:layout_constraintEnd_toStartOf="@+id/profile"
+        app:layout_constraintStart_toEndOf="@+id/home"
+        app:layout_constraintTop_toTopOf="@+id/guideline16"
         app:layout_constraintVertical_bias="1.0"
         app:layout_constraintWidth_percent="0.33" />
 
@@ -164,14 +169,11 @@
         android:id="@+id/profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#343456"
+        android:background="#797371"
         android:src="@drawable/profile"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/settings"
-        app:layout_constraintStart_toEndOf="@+id/home"
-        app:layout_constraintTop_toTopOf="@+id/guideline10"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/settings"
         app:layout_constraintWidth_percent="0.33" />
 
     <android.support.constraint.Guideline
@@ -228,7 +230,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
+        app:layout_constraintGuide_percent="1.0"
         app:layout_constraintGuide_end="1dp" />
 
     <android.support.constraint.Guideline

@@ -1,73 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NoteWindow"
-    android:background="#95f49c9c">
+    android:background="#95f49c9c"
+    tools:context=".NoteWindow">
 
     <TextView
         android:id="@+id/noteTitleText"
         android:layout_width="88dp"
         android:layout_height="60dp"
-        android:textSize="10pt"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/title_note"
         android:textColor="#141313"
+        android:textSize="10pt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/noteTitleValue"
-        android:layout_width="189dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:hint="Untitled Note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:hint="Untitled Note"
+        android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/noteTitleText"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editNote"
-        android:layout_width="365dp"
-        android:layout_height="593dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="0dp"
+        android:layout_height="811dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="21dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="top"
+        android:layout_marginEnd="2dp"
         android:autofillHints="@string/note_hint"
         android:ems="10"
+        android:gravity="top"
         android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noteTitleValue" />
 
     <ImageButton
         android:id="@+id/saveButton"
-        android:layout_width="51dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginBottom="32dp"
         android:contentDescription="@string/save_note"
+        android:src="@drawable/save"
+        app:layout_constraintBottom_toTopOf="@+id/editNote"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.99"
         app:layout_constraintStart_toEndOf="@+id/noteTitleValue"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/save"/>
+        app:layout_constraintVertical_bias="0.16" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.0"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="1.0"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1.0"
+        app:layout_constraintGuide_begin="20dp" />
 </android.support.constraint.ConstraintLayout>

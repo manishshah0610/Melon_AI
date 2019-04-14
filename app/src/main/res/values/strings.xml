@@ -37,4 +37,6 @@
     <string name="note_hint">Start writing...</string>
     <string name="save_note">Save Note</string>
     <string name="deleteNote">Delete Note</string>
+    <string name="title_activity_main_videocall">Sign in</string>
+    <string name="help_support"><![CDATA[Help & Support]]></string>
 </resources>

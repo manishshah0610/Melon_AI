@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "745799263828",
+    "firebase_url": "https://melon-ai.firebaseio.com",
+    "project_id": "melon-ai",
+    "storage_bucket": "melon-ai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745799263828:android:6edd8160c65c80ce",
+        "android_client_info": {
+          "package_name": "com.example.android.my_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745799263828-cjt52bjcst3d0uoe95gcccbf7dk55teg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTcOP9CosauypEZ3E_o77Ih-V1k4WU-wU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745799263828-cjt52bjcst3d0uoe95gcccbf7dk55teg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
