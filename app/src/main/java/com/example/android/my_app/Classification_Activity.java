@@ -1,6 +1,9 @@
 package com.example.android.my_app;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.os.Process;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.Activity;
@@ -11,7 +14,11 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.FileInputStream;
@@ -25,10 +32,11 @@ import org.tensorflow.lite.Interpreter;
 //import com.example.sound_class.MFCC;
 
 
-public class Classification_Activity extends Activity{
+public class Classification_Activity extends Activity implements AdapterView.OnItemSelectedListener {
     private static final int SampleRate = 22050;
     private static final int Duration = 2970;
-    private static final int RecordLength = (int)(SampleRate*Duration/1000);
+    private static int RecordLength = (int)(SampleRate*Duration/1000);
+    private int pos = 0;
     private static final String InputNodeName = "IP_input";
     private static final String OutputNode = "OP/Softmax";
     private static final String ModelFile = "model.tflite";
@@ -47,21 +55,59 @@ public class Classification_Activity extends Activity{
 
     private final ReentrantLock RecordingBufferLock = new ReentrantLock();
     private Interpreter tflite;
+    private static float THRESH = (float)0.2;
+    private static MFCC mf = new MFCC();
     private static float[][] OUTPUT = new float[1][10];
     private static String res = "";
-    private static float THRESH = (float)0.1;
-    private static MFCC mf = new MFCC();
     private static int count = 0;
+
+    ImageButton home;
+    ImageButton settings, profile;
+    Context context;
+    Vibrator vibrator;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classification_);
+        home = findViewById(R.id.home);
+        settings = findViewById(R.id.settings);
+        profile = findViewById(R.id.profile);
+        context = getApplicationContext();
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context,MainActivity.class));
+                finish();
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context,ProfileActivity.class));
+                //finish();
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context,Settings.class));
+                //finish();
+            }
+        });
+
+
+
         StartButton = (Button)findViewById(R.id.Rec);
         StopButton = (Button)findViewById(R.id.stoprec);
-        //StartButton.setText("Start Recording");
-        //StopButton.setText("Stop Recording");
-        //Activity activity = new Activity();
+        Spinner spinn = (Spinner)findViewById(R.id.Spinn);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.class_number,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinn.setAdapter(adapter);
+        spinn.setOnItemSelectedListener(this);
         try {
             Log.i("TR","try");
             tflite = new Interpreter(loadModel(Classification_Activity.this));
@@ -69,34 +115,8 @@ public class Classification_Activity extends Activity{
         catch(Exception IOExceptio){
             Log.i("CTCH","catch");
         }
-        /*ClassificationThread = new Thread(
-                        new Runnable() {
-                    @Override
-                    public void run() {
-                        Classify(foo);
-                    }
-                }
-        );
-        ClassificationThread_1 = new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        Classify(foo);
-                    }
-                }
-        );
-        /*RecordingThread = new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Record();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-        );*/
+
+        vibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
         StartButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -109,6 +129,7 @@ public class Classification_Activity extends Activity{
                                             Record();
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
+                                            vibrator.vibrate(300000);
                                         }
                                     }
                                 }
@@ -121,6 +142,7 @@ public class Classification_Activity extends Activity{
                         } catch (InterruptedException e) {
                             Log.d("THREADIO","Thread Error");
                             e.printStackTrace();
+                            vibrator.vibrate(300000);
 
                         }
 
@@ -139,23 +161,20 @@ public class Classification_Activity extends Activity{
         OutText = (TextView)findViewById(R.id.text);
         //requestMicrophonePermission();
 
-    }
-    /*
-    private void requestMicrophonePermission() {
-        requestPermissions(
-                new String[] {android.Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO);
+
     }
 
-    @Override
-    public void onRequestPermissionsResult(
-            int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == REQUEST_RECORD_AUDIO
-                && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        }
+
+    public void onBackPressed()
+    {
+
+        Intent intent=new Intent(context,MainActivity.class);
+        startActivity(intent);
+        finish();
+
     }
-    */
-    private MappedByteBuffer loadModel(Activity activity) throws IOException {
+
+        private MappedByteBuffer loadModel(Activity activity) throws IOException {
         Log.i("IO1","PASS");
         AssetFileDescriptor fileDescriptor = activity.getAssets().openFd(ModelFile);
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
@@ -166,12 +185,6 @@ public class Classification_Activity extends Activity{
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
     }
     public synchronized void StartRecording() throws InterruptedException {
-        /*if(RecordingThread!=null){
-            return;
-        }*/
-
-
-        //InfRec = true;
         res = "";
         RecordOffset = 0;
         RecordingThread.start();
@@ -213,6 +226,7 @@ public class Classification_Activity extends Activity{
                             new Runnable() {
                                 @Override
                                 public void run() {
+                                    short[] p  = new short[10];
                                     Classify(foo);
                                 }
                             }
@@ -247,6 +261,7 @@ public class Classification_Activity extends Activity{
                             new Runnable() {
                                 @Override
                                 public void run() {
+                                    short[] p = new short[10];
                                     Classify(foo);
                                 }
                             }
@@ -283,37 +298,7 @@ public class Classification_Activity extends Activity{
 
     }
 
-    /* public synchronized void startClassification(Thread th, final int x){
-         /*if (ClassificationThread!=null){
-             return;
-         }
-         ClassificationThread = new Thread(
-                 new Runnable() {
-                     @Override
-                     public void run() {
-                         Classify();
-                     }
-                 }
-         );
-         //ClassificationThread.start();
-         //Classify();
-         th = new Thread(
-                 new Runnable() {
-                     @Override
-                     public void run() {
-                         Classify(x);
-                     }
-                 }
-         );
-         th.start();
-     }*/
     private void Classify(int x){
-       /*this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                OutText.setText(res);
-            }
-        });*/
         double[] buff = new double[RecordLength];
         Log.d(LG,"Here");
         if (x==1){
@@ -328,12 +313,12 @@ public class Classification_Activity extends Activity{
         }
         float[][][][] spec = mf.process(buff);
 
-        /*float[][][][] feed = new float[1][128][128][1];
-        for(int i = 0;i<128;i++){
-            for(int j = 0;j<128;j++){
-                feed[0][i][j][0] = (float)spec[i][j];
-            }
-        }*/
+        //float[][][][] feed = new float[1][128][128][1];
+        //for(int i = 0;i<128;i++){
+        //   for(int j = 0;j<128;j++){
+        //       feed[0][i][j][0] = (float)spec[i][j];
+        //  }
+        //}
         Log.i("Before","Before detection");
         int mx = -1;
         float mx_score = 0;
@@ -347,7 +332,7 @@ public class Classification_Activity extends Activity{
             }
         }
         if (mx_score<THRESH){
-            res = "Tell everyone to SHUT THE FUCK UP...It's very noisy here";
+            res = "It's too noisy out there, couldn't detect the class.";
         }
         else{
             switch (mx){
@@ -383,26 +368,34 @@ public class Classification_Activity extends Activity{
                     break;
             }
         }
+        final int tmp = mx+1;
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 OutText.setText(res);
+                if(tmp==pos){
+                    vibrator.vibrate(1000);
+                }
+                //vibrator.vibrate(1000);
             }
         });
         //OutText.setText(res);
     }
-}
 
-/*
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-public class Classification_Activity extends AppCompatActivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_classification_);
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        pos = position;
+        String text = parent.getItemAtPosition(position).toString();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
-*/
+
+

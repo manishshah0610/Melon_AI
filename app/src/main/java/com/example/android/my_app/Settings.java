@@ -9,8 +9,10 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 public class Settings extends AppCompatActivity {
-    private TextView logout;
+    private TextView logout,help,feedback;
     private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,13 +20,26 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         logout = (TextView) findViewById(R.id.etlogout);
         firebaseAuth = FirebaseAuth.getInstance();
-
+        help = (TextView) findViewById(R.id.tvhelp);
+        feedback=(TextView) findViewById(R.id.tvfeedback);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 firebaseAuth.signOut();
                 finish();
                 startActivity(new Intent(Settings.this,login.class));
+            }
+        });
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Settings.this,help_support.class));
+            }
+        });
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Settings.this,feedback.class));
             }
         });
 

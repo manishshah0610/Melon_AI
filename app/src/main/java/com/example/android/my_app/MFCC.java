@@ -8,7 +8,7 @@ public class MFCC {
     private final static int       hop_length           = 512;
     private final static int	   n_mels               = 128;
 
-    private final static double    sampleRate           = 22050.0;
+    private final static double    sampleRate           = 22500.0;
     private final static double    fMax                 = sampleRate/2.0;
 
     private double[][] melBasis = melFilter();
@@ -34,28 +34,11 @@ public class MFCC {
         }
         return finalMfcc;
     }
-
-    //DCT to mfcc, librosa
-    /*private double[][] dctMfcc(double[] y){
-        final double[][] specTroGram = powerToDb(melSpectrogram(y));
-        final double[][] dctBasis = dctFilter(n_mfcc, n_mels);
-        double[][] mfccSpecTro = new double[n_mfcc][specTroGram[0].length];
-        for (int i = 0; i < n_mfcc; i++){
-            for (int j = 0; j < specTroGram[0].length; j++){
-                for (int k = 0; k < specTroGram.length; k++){
-                    mfccSpecTro[i][j] += dctBasis[i][k]*specTroGram[k][j];
-                }
-            }
-        }
-        return mfccSpecTro;
-    }*/
-
-
-    //mel spectrogram, librosa
     private float[][][][] melSpectrogram(double[] y){
         //double[][] melBasis = melFilter();
         double[][] spectro = stftMagSpec(y);
         float[][][][] melS = new float[1][melBasis.length][spectro[0].length][1];
+        System.out.print(1+" " + melBasis.length+" " + spectro[0].length+" "+1 );
         for (int i = 0; i < melBasis.length; i++){
             for (int j = 0; j < spectro[0].length; j++){
                 for (int k = 0; k < melBasis[0].length; k++){
@@ -67,7 +50,7 @@ public class MFCC {
     }
 
 
-    //stft, librosa
+    //stft, Returns Magnitude of the STFT
     private double[][] stftMagSpec(double[] y){
         //Short-time Fourier transform (STFT)
         //final double[] fftwin = getWindow();
@@ -108,7 +91,7 @@ public class MFCC {
     }
 
 
-    //get hann window, librosa
+    //get hann window
     private double[] getWindow(){
         //Return a Hann window for even n_fft.
         //The Hann window is a taper formed by using a raised cosine or sine-squared
@@ -120,7 +103,7 @@ public class MFCC {
         return win;
     }
 
-    //frame, librosa
+    //frame
     private double[][] yFrame(double[] ypad){
         final int n_frames = 1 + (ypad.length - n_fft) / hop_length;
         double[][] winFrames = new double[n_fft][n_frames];
@@ -132,60 +115,8 @@ public class MFCC {
         return winFrames;
     }
 
-    //power to db, librosa
-    private double[][] powerToDb(double[][] melS){
-        //Convert a power spectrogram (amplitude squared) to decibel (dB) units
-        //  This computes the scaling ``10 * log10(S / ref)`` in a numerically
-        //  stable way.
-        double[][] log_spec = new double[melS.length][melS[0].length];
-        double maxValue = -100;
-        for (int i = 0; i < melS.length; i++){
-            for (int j = 0; j < melS[0].length; j++){
-                double magnitude = Math.abs(melS[i][j]);
-                if (magnitude > 1e-10){
-                    log_spec[i][j]=10.0*log10(magnitude);
-                }else{
-                    log_spec[i][j]=10.0*(-10);
-                }
-                if (log_spec[i][j] > maxValue){
-                    maxValue = log_spec[i][j];
-                }
-            }
-        }
 
-        //set top_db to 80.0
-        for (int i = 0; i < melS.length; i++){
-            for (int j = 0; j < melS[0].length; j++){
-                if (log_spec[i][j] < maxValue - 80.0){
-                    log_spec[i][j] = maxValue - 80.0;
-                }
-            }
-        }
-        //ref is disabled, maybe later.
-        return log_spec;
-    }
-
-    //dct, librosa
-    private double[][] dctFilter(int n_filters, int n_input){
-        //Discrete cosine transform (DCT type-III) basis.
-        double[][] basis = new double[n_filters][n_input];
-        double[] samples = new double[n_input];
-        for (int i = 0; i < n_input; i++){
-            samples[i] = (1 + 2*i) * Math.PI/(2.0*(n_input));
-        }
-        for (int j = 0; j < n_input; j++){
-            basis[0][j] = 1.0/Math.sqrt(n_input);
-        }
-        for (int i = 1; i < n_filters; i++){
-            for (int j = 0; j < n_input; j++){
-                basis[i][j] = Math.cos(i*samples[j]) * Math.sqrt(2.0/(n_input));
-            }
-        }
-        return basis;
-    }
-
-
-    //mel, librosa
+    //mel
     private double[][] melFilter(){
         //Create a Filterbank matrix to combine FFT bins into Mel-frequency bins.
         // Center freqs of each FFT bin
@@ -234,7 +165,7 @@ public class MFCC {
         //need to check if there's an empty channel somewhere
     }
 
-    //fft frequencies, librosa
+    //fft frequencies
     private double[] fftFreq() {
         //Alternative implementation of np.fft.fftfreqs
         double[] freqs = new double[1+n_fft/2];
@@ -244,7 +175,7 @@ public class MFCC {
         return freqs;
     }
 
-    //mel frequencies, librosa
+    //mel frequencies
     private double[] melFreq(int numMels) {
         //'Center freqs' of mel bands - uniformly spaced between limits
         double[] LowFFreq = new double[1];
@@ -261,7 +192,7 @@ public class MFCC {
     }
 
 
-    //mel to hz, htk, librosa
+    //mel to hz, htk
     private double[] melToFreqS(double[] mels) {
         double[] freqs = new double[mels.length];
         for (int i = 0; i < mels.length; i++) {
@@ -271,7 +202,7 @@ public class MFCC {
     }
 
 
-    // hz to mel, htk, librosa
+    // hz to mel, htk
     protected double[] freqToMelS(double[] freqs) {
         double[] mels = new double[freqs.length];
         for (int i = 0; i < freqs.length; i++){
@@ -280,7 +211,7 @@ public class MFCC {
         return mels;
     }
 
-    //mel to hz, Slaney, librosa
+    //mel to hz, Slaney
     private double[] melToFreq(double[] mels) {
         // Fill in the linear scale
         final double f_min = 0.0;
@@ -303,7 +234,7 @@ public class MFCC {
     }
 
 
-    // hz to mel, Slaney, librosa
+    // hz to mel, Slaney
     protected double[] freqToMel(double[] freqs) {
         final double f_min = 0.0;
         final double f_sp = 200.0 / 3;

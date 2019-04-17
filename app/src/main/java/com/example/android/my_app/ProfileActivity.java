@@ -47,11 +47,11 @@ public class ProfileActivity extends AppCompatActivity {
                 profile Profile = dataSnapshot.getValue(profile.class);
                 profileName.setText("Name :"+Profile.getUserName());
                 profileAge.setText("Age :"+Profile.getUserAge());
-                profileEmail.setText("Email:"+Profile.getUserEmail());
-                profileDeaf.setText("User type:" +Profile.getUserDeaf());
-                profileFName.setText("Familly member:"+Profile.getfName());
-                profileRelation.setText("Relation with user:"+Profile.getfRelation());
-                profileNumber.setText("Mobile no.:" +Profile.getfNo());
+                profileEmail.setText("Email :"+Profile.getUserEmail());
+                profileDeaf.setText("User type :" +Profile.getUserDeaf());
+                profileFName.setText("Family member :"+Profile.getfName());
+                profileRelation.setText("Relation with user :"+Profile.getfRelation());
+                profileNumber.setText("Mobile no. :" +Profile.getfNo());
             }
 
             @Override

@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -23,12 +24,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".changePassword"/>
+        <activity android:name=".SummaryActivity"></activity>
+        <activity android:name=".myAlarms"></activity>
+        <activity android:name=".Alarm2"></activity>
+        <activity android:name=".help_support" />
+        <activity android:name=".feedback"></activity>
+        <activity android:name=".VideoCall" />
+        <activity android:name=".changePassword"></activity>
         <activity android:name=".UpdateProfile" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".password" />
-        <activity android:name=".login"/>
-        <activity android:name=".register"/>
+        <activity android:name=".login" />
+        <activity android:name=".register" />
         <activity android:name=".Classification_Activity" />
         <activity android:name=".Alarm" />
         <activity android:name=".MainActivity" />
@@ -39,12 +46,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Tutorial" />
-        <activity android:name=".Notepad" />
-        <activity android:name=".NoteWindow" />
-        <activity android:name=".Summary" />
-        <activity android:name=".Notes" />
-        <activity android:name=".Settings" /> <!-- <receiver android:name=".Alarm_Receiver"></receiver -->
+        <activity android:name=".Tutorial"></activity>
+        <activity android:name=".Notepad"></activity>
+        <activity android:name=".NoteWindow"></activity>
+        <activity android:name=".Notes"></activity>
+        <activity android:name=".Settings"> <!-- <receiver android:name=".Alarm_Receiver"></receiver -->
+        </activity>
+
         <receiver
             android:name=".Alarm_Receiver"
             android:process=":remote" />

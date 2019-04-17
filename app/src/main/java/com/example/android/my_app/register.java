@@ -21,12 +21,25 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+
+
 public class register extends AppCompatActivity {
+
+
     private EditText userName,userPassword,userEmail,userAge,userDeaf,fName,fRelation,fNo;
+
     private Button regButton;
+
     private TextView userLogin;
+
     private FirebaseAuth firebaseAuth;
+
     String name,password,email,age,deaf,familyMember,relation,number;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,29 +88,101 @@ public class register extends AppCompatActivity {
         fRelation = (EditText) findViewById(R.id.etRelation);
         fNo = (EditText) findViewById(R.id.etMobile);
     }
-    private boolean validate()
+
+
+    public boolean validate()
     {
+
         Boolean result = false;
+
         name = userName.getText().toString();
+
         password = userPassword.getText().toString();
+
         email = userEmail.getText().toString();
+
         age = userAge.getText().toString();
+
         deaf = userDeaf.getText().toString();
+
         familyMember = fName.getText().toString();
+
         relation = fRelation.getText().toString();
+
         number = fNo.getText().toString();
 
-        if(name.isEmpty() || password.isEmpty() || email.isEmpty() || age.isEmpty())
-        {
-            Toast.makeText(this,"Please enter all the details",Toast.LENGTH_SHORT);
-            startActivity(new Intent(register.this,login.class));
+        final String EMAIL_PATTERN ="^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+        final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+
+        final Matcher matcher = pattern.matcher(email);
+
+        boolean isEmailValid=matcher.matches();
+
+
+        if(name.isEmpty() || password.isEmpty() || email.isEmpty() || age.isEmpty() || !isEmailValid) {
+
+            if (!isEmailValid) {
+
+
+                Toast.makeText(this, "Enter valid email id", Toast.LENGTH_LONG).show();
+            }
+
+            else {
+
+                Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT);
+
+                //startActivity(new Intent(register.this, login.class));
+
+            }
+
         }
+
         else
         {
-            result =true;
+            if(password.length()<6)
+                Toast.makeText(this,"Password should be of atleast 6 characters",Toast.LENGTH_LONG).show();
+            else if(Integer.parseInt(age) <= 0) {
+                Toast.makeText(this,"Age can't be non-positive number",Toast.LENGTH_LONG).show();
+            } else
+                result =true;
         }
         return result;
     }
+
+/*    ///VALIDATE FUNCTION FOR TESTING-----------------------------------------------------------
+    public boolean validate()
+    {
+        Boolean result = false;
+        String n = this.name;
+       String p = this.password;
+        String e = this.email;
+        String a = this.age;
+
+        final String EMAIL_PATTERN ="^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        final Matcher matcher = pattern.matcher(email);
+        boolean isEmailValid=matcher.matches();
+        if(name.isEmpty() || password.isEmpty() || email.isEmpty() || age.isEmpty() || !isEmailValid) {
+
+            result=false;
+        }
+        else
+        {
+            if(password.length()<6)
+                result = false;
+            else if(Integer.parseInt(age) <= 0) {
+                result = false;
+                //Toast.makeText(this,"Age can't be non-positive number",Toast.LENGTH_LONG).show();
+            } else
+                result =true;
+        }
+        return result;
+    }
+//    ----------------------------------------------------------------------------------------
+
+*/
+
 
     private void sendEmailVerification() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();

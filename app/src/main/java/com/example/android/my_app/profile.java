@@ -8,6 +8,8 @@ public class profile {
     public String fName;
     public String fRelation;
     public String fNo;
+    public float value;
+    public String msg;
     public profile(){}
     public profile(String userAge,String userEmail,String userName,String userDeaf,String fName,String fRelation,String fNo)
     {
@@ -19,6 +21,19 @@ public class profile {
         this.fRelation = fRelation;
         this.fNo = fNo;
     }
+    public profile(String userAge,String userEmail,String userName,String userDeaf,String fName,String fRelation,String fNo,float value,String msg)
+    {
+        this.userAge = userAge;
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userDeaf = userDeaf;
+        this.fName = fName;
+        this.fRelation = fRelation;
+        this.fNo = fNo;
+        this.value = value;
+        this.msg = msg;
+    }
+
 
     public String getUserAge() {
         return userAge;

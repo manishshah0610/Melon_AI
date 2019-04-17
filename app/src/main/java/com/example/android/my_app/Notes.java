@@ -63,7 +63,7 @@ public class Notes extends AppCompatActivity {
         for(int i=0;i<1000;i++)available_file_set.add(i);
 
         for (File f:files
-             ) {
+        ) {
             String fname = f.getName();
             int l=fname.length();
             if(l>4 && fname.charAt(l-1)=='t' && fname.charAt(l-2)=='x' && fname.charAt(l-3)=='t' && fname.charAt(l-4)=='.')
@@ -105,7 +105,7 @@ public class Notes extends AppCompatActivity {
                         Log.d("ERROR HERE: ","WHY");}
                     else{
                         myNotes.add("notes_"+file_pos+".txt");
-                    available_file_set.remove(file_pos);}
+                        available_file_set.remove(file_pos);}
                     mAdapter.notifyDataSetChanged();
                 }
             }

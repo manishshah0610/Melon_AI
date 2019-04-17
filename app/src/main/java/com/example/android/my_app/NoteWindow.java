@@ -215,7 +215,7 @@ public class NoteWindow extends AppCompatActivity {
         File titleFilenameMap =new File(getFilesDir()+"myMapsFile");
         if(!titleFilenameMap.isFile()) {
             try {
-              boolean i = titleFilenameMap.createNewFile();
+                boolean i = titleFilenameMap.createNewFile();
                 return true;
             }
             catch (IOException e) {

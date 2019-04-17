@@ -92,11 +92,44 @@ public class login extends AppCompatActivity {
                     if(counter==0)
                     {
                         Login.setEnabled(false);
+
                     }
                 }
             }
         });
     }
+
+   /* public boolean validate(String userName, String userPassword){
+        //progressDialog.setMessage("Logging in");
+        //progressDialog.show();
+        boolean result;
+        result= false;
+        firebaseAuth.signInWithEmailAndPassword(userName,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
+                {
+                    result = true;
+                    //progressDialog.dismiss();
+                    //checkEmailVerification();
+                }
+                else {
+                    //Toast.makeText(login.this,"Login failed",Toast.LENGTH_SHORT).show();
+                    counter--;
+                    //Info.setText("No. of attempts remaining : "+counter);
+                    //progressDialog.dismiss();
+                    if(counter==0)
+                    {
+                       // Login.setEnabled(false);
+                        result = false;
+                    }
+                }
+            }
+        });
+      return result;
+    }
+    */
+
     private void checkEmailVerification()
     {
         FirebaseUser firebaseUser =firebaseAuth.getInstance().getCurrentUser();

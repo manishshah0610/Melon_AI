@@ -47,9 +47,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(tut);
     }
 
+    public void video(View view){
+        Intent tut = new Intent(MainActivity.this, VideoCall.class);
+        startActivity(tut);
+    }
+
 
     public void summary(View view){
-        Intent sum = new Intent(MainActivity.this, Summary.class);
+        Intent sum = new Intent(MainActivity.this, SummaryActivity.class);
         startActivity(sum);
     }
 
@@ -59,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void alarm(View view){
-        Intent set = new Intent(MainActivity.this, Alarm.class);
+        Intent set = new Intent(MainActivity.this, myAlarms.class);
         startActivity(set);
     }
 
     public void homed(View view){
         Intent set = new Intent(MainActivity.this, MainActivity.class);
-     //   startActivity(set);
+       startActivity(set);
         finish();
     }
     public void rec(View view){
@@ -86,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
         }
     }
-}
-   /* private void createNotificationChannel() {
+    /*
+    private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -102,5 +107,5 @@ public class MainActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
     }
-
-}*/
+    */
+}

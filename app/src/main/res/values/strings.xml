@@ -32,6 +32,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="NOTES">NOTES</string>
     <string name="title_note">Title</string>
+    <string name="app_name">Melon AI</string>
     <string name="note_title">Untitled Note</string>
     <string name="title_hint">Untitled Note</string>
     <string name="note_hint">Start writing...</string>
@@ -39,4 +40,19 @@
     <string name="deleteNote">Delete Note</string>
     <string name="title_activity_main_videocall">Sign in</string>
     <string name="help_support"><![CDATA[Help & Support]]></string>
+
+    <string-array name="class_number">
+        <item>All</item>
+        <item>Air Conditioner</item>
+        <item>Car horn</item>
+        <item>Children Playing</item>
+        <item>Dog Barking</item>
+        <item>Drilling</item>
+        <item>Engine Idlling</item>
+        <item>Gun Shot</item>
+        <item>Jackhammer</item>
+        <item>Siren</item>
+        <item>Street Music</item>
+
+    </string-array>
 </resources>

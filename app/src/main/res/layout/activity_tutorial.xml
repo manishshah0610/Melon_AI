@@ -5,6 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="100dp"
+        android:textStyle="italic"
+        android:text="Video will play in a while"/>
+
     <WebView
         android:id="@+id/youtubeview"
         android:layout_width="match_parent"

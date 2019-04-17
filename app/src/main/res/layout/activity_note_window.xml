@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#95f49c9c"
+    android:background="#ffffff"
     tools:context=".NoteWindow">
 
     <TextView
         android:id="@+id/noteTitleText"
-        android:layout_width="88dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:text="@string/title_note"
-        android:textColor="#141313"
+        android:textColor="#000000"
         android:textSize="10pt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,34 +25,38 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/green"
         android:ems="10"
-
         android:hint="Untitled Note"
         android:inputType="textPersonName"
+
+        android:textColorHint="@color/green"
+        android:textCursorDrawable="@color/green"
         app:layout_constraintStart_toEndOf="@+id/noteTitleText"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editNote"
-        android:layout_width="0dp"
-        android:layout_height="811dp"
+        android:layout_width="405dp"
+        android:layout_height="577dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="21dp"
-        android:layout_marginEnd="2dp"
         android:autofillHints="@string/note_hint"
         android:ems="10"
         android:gravity="top"
         android:inputType="textMultiLine"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noteTitleValue" />
+        app:layout_constraintTop_toBottomOf="@+id/noteTitleValue"
+        app:layout_constraintVertical_bias="0.512" />
 
     <ImageButton
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
@@ -61,40 +64,42 @@
         android:src="@drawable/save"
         app:layout_constraintBottom_toTopOf="@+id/editNote"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.99"
-        app:layout_constraintStart_toEndOf="@+id/noteTitleValue"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.0"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.0" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="1.0"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="1.0" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.0"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.0" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="1.0"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="1.0" />
+
+
 </android.support.constraint.ConstraintLayout>
