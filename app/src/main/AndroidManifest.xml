@@ -26,26 +26,39 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SummaryActivity"></activity>
         <activity android:name=".myAlarms"></activity>
-        <activity android:name=".Alarm2"></activity>
+        <activity android:name=".Alarm2"/>
+
         <activity android:name=".help_support" />
-        <activity android:name=".feedback"></activity>
+        <activity android:name=".feedback"/>
+
         <activity android:name=".VideoCall" />
-        <activity android:name=".changePassword"></activity>
+        <activity android:name=".changePassword"/>
+
+
         <activity android:name=".UpdateProfile" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".password" />
-        <activity android:name=".login" />
+        <activity android:name=".ProfileActivity"/>
+
+
+
+        <activity android:name=".password"/>
+
+        <activity android:name=".login"/>
+
         <activity android:name=".register" />
         <activity android:name=".Classification_Activity" />
-        <activity android:name=".Alarm" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".splash">
+        <activity android:name=".Alarm"/>
+
+        <activity android:name=".MainActivity"/>
+
+       <activity android:name=".splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity android:name=".Tutorial"></activity>
         <activity android:name=".Notepad"></activity>
         <activity android:name=".NoteWindow"></activity>

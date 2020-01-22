@@ -40,6 +40,7 @@
         android:layout_width="405dp"
         android:layout_height="577dp"
         android:layout_marginStart="2dp"
+        android:textCursorDrawable="@color/green"
         android:layout_marginTop="21dp"
         android:autofillHints="@string/note_hint"
         android:ems="10"

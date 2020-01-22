@@ -1,4 +1,4 @@
-/*package com.example.android.my_app;
+package com.example.android.my_app;
 
 
 import android.support.test.espresso.ViewInteraction;
@@ -19,18 +19,21 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SpeechtotextTest {
+public class Set_AlarmTest {
 
     @Rule
-    public ActivityTestRule<Speechtotext> mActivityTestRule = new ActivityTestRule<>(Speechtotext.class);
+    public ActivityTestRule<Alarm2> mActivityTestRule = new ActivityTestRule<>(Alarm2.class);
 
     @Test
-    public void speechtotextTest() {
+    public void alarm2Test() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -40,15 +43,15 @@ public class SpeechtotextTest {
             e.printStackTrace();
         }
 
-        ViewInteraction appCompatImageView = onView(
-                allOf(withId(R.id.btnSpeak),
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.start_alarm), withText("Start Alarm"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
+                                        withClassName(is("android.widget.RelativeLayout")),
+                                        1),
+                                0),
                         isDisplayed()));
-        appCompatImageView.perform(click());
+        appCompatButton.perform(click());
     }
 
     private static Matcher<View> childAtPosition(
@@ -70,4 +73,3 @@ public class SpeechtotextTest {
         };
     }
 }
-*/
